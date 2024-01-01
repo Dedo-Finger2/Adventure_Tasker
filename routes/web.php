@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,5 @@ Route::get('/logout', [LoginController::class, 'logout'])
 
 
 // User
+Route::get('/register', [UserController::class, 'create'])
+    ->name('user.create');
