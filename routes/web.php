@@ -26,3 +26,5 @@ Route::post('/auth', [LoginController::class, 'auth'])
 Route::get('/logout', [LoginController::class, 'logout'])
     -> name('logout');
 
+
+// User
