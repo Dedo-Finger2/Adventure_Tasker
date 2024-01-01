@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('due_date')->nullable(true);
             $table->boolean('overdue')->default(false);
             $table->boolean('recurring')->default(false);
-            $table->string('recurring_type', 50)->nullable(true)->default('Diario');
+            $table->integer('recurring_type')->nullable(true)->default(0);
 
             $table->unsignedBigInteger('task_id');
             $table->unsignedBigInteger('user_id');
@@ -33,6 +33,7 @@ return new class extends Migration
             $table->foreign('difficulty_id')->references('id')->on('difficulties')->onDelete('cascade');
 
             $table->timestamp('deleted_at')->nullable(true);
+            $table->timestamp('completed_at')->nullable(true);
             $table->timestamps();
         });
     }
