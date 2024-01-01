@@ -13,6 +13,7 @@ class LoginController extends Controller
     public function login()
     {
         # Retornar a view de login
+        return view("login");
     }
 
 
