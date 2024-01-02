@@ -21,4 +21,10 @@ class Priority extends Model
         'exp',
         'money',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
 }

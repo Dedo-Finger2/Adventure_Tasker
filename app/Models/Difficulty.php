@@ -21,4 +21,10 @@ class Difficulty extends Model
         'exp_multiplier',
         'money_multiplier',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    
 }
