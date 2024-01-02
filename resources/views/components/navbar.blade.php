@@ -5,6 +5,7 @@
     @auth
         <span>{{ auth()->user()->name }}</span> -
         <livewire:user-status-navbar />
+        <a href="{{ route('user.profile') }}">Perfil</a> -
         <a href="{{ route('logout') }}">Logout</a>
     @endauth
 </nav>

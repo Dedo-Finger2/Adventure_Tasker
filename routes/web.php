@@ -31,3 +31,6 @@ Route::get('/logout', [LoginController::class, 'logout'])
 // User
 Route::get('/register', [UserController::class, 'create'])
     ->name('user.create');
+
+Route::get('/profile', [UserController::class, 'profile'])
+    ->name('user.profile');

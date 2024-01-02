@@ -16,4 +16,16 @@ class UserController extends Controller
         # Retornar a view de cadastro de usuários
         return view("user.create");
     }
+
+
+    /**
+     * Método responsável por carregar o perfil do usuário
+     *
+     * @return mixed
+     */
+    public function profile()
+    {
+        # Retornar a view de perfil do usuário
+        return view("user.profile");
+    }
 }
