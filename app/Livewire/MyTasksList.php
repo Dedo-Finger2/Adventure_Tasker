@@ -12,12 +12,27 @@ class MyTasksList extends Component
 {
     use WithPagination;
 
-    protected $listeners = ['task_created' => 'loadTasks'];
+    protected $listeners = ['task_created' => 'loadTasks', 'task_completed' => 'loadTasks'];
+
 
     public function loadTasks()
     {
-        $this->render(); // Chama o método render novamente para recarregar as tarefas
+        # Chama o método render novamente para recarregar as tarefas
+        $this->render();
     }
+
+    public function completeTask($taskId)
+    {
+        $task = Task::find($taskId);
+        $task->completed_at = now();
+        $task->save();
+
+        $this->dispatch('task_completed');
+
+        session()->flash('message','Tarefa marcada como concluída!');
+
+    }
+
 
     public function render()
     {
