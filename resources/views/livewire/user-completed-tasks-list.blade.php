@@ -1,10 +1,5 @@
 <div>
-
     @if (count($tasks) > 0)
-        @if (session()->has('message'))
-            <div>{{ session('message') }}</div>
-        @endif
-
         <form>
             @foreach ($tasks as $task)
                 @if ($task->recurring)
@@ -23,7 +18,7 @@
 
         {{ $tasks->links() }}
     @else
-        <p>Nenhuma task está vinculada a você.</p>
+        <p>Nenhuma task completa ainda.</p>
     @endif
 
 </div>

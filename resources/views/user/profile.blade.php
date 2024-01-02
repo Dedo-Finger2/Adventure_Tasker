@@ -34,7 +34,7 @@
 
     <div id="tab1" class="tabcontent">
         <h3>Tarefas concluídas</h3>
-        <p>Este é o conteúdo da Tab 1.</p>
+        <livewire:user-completed-tasks-list />
     </div>
 
     <div id="tab2" class="tabcontent" style="display: none">
