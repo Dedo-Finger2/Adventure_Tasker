@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-})->middleware('auth');
+})->name('home')->middleware('auth');
 
 // Login
 Route::get('/login', [LoginController::class, 'login'])
