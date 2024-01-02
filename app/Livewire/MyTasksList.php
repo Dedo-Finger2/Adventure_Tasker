@@ -21,7 +21,10 @@ class MyTasksList extends Component
 
     public function render()
     {
-        $userTasks = Task::with('user')->where('user_id', auth()->user()->id)->get();
+        $userTasks = Task::with('user')->where(
+            'user_id',
+            auth()->user()->id)
+            ->paginate(5);
 
         return view('livewire.my-tasks-list', [
             'tasks' => $userTasks,
