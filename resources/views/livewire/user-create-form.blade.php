@@ -6,7 +6,7 @@
         @endif
     --}}
 
-    {{-- FOrmulário, precisa do submit.prevent para evitar que haja como um formuláiro normal --}}
+    {{-- Formulário, precisa do submit.prevent para evitar que haja como um formuláiro normal --}}
     <form wire:submit.prevent="createUser">
         {{-- Campo de nome --}}
         <div>

@@ -4,7 +4,6 @@
         <div>{{ session('message') }}</div>
     @endif
 
-
     <form wire:submit.prevent="createPriority">
         {{-- Campo de nome --}}
         <div>
