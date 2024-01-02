@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PriorityController;
+use App\Http\Controllers\DifficultyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +39,13 @@ Route::get('/my-tasks', [UserController::class, 'myTasks'])
     ->name('user.tasks');
 
 // Task
+
+
+// Priority
+Route::get('/create-priority', [PriorityController::class, 'create'])
+    ->name('priority.create');
+
+    
+// Difficulty
+Route::get('/create-difficulty', [DifficultyController::class, 'create'])
+    ->name('difficulty.create');
