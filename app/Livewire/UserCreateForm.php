@@ -59,8 +59,18 @@ class UserCreateForm extends Component
         return redirect()->route('home')->with('success', 'Logado com sucesso!');
     }
 
+
+    /**
+     * Método responsável por fazer a persistencia de dados acerca dos atributos
+     * do usuário. Feito de forma separada do cadastro.
+     *
+     * @param User $user - Usuário que foi cadastrado (vamos precisar do ID dele)
+     * @param UserAttribute $userAttribute - Injeção de dependência
+     * @return void
+     */
     private function createUserAttributes(User $user, UserAttribute $userAttribute)
     {
+        # Criar atributos padrões para os usuários
         $userAttribute::create([
             'user_id' => $user->id,
             'current_level' => 0,
@@ -77,6 +87,12 @@ class UserCreateForm extends Component
         ]);
     }
 
+
+    /**
+     * Método responsável por renderizar o componente na view
+     *
+     * @return mixed
+     */
     public function render()
     {
         return view('livewire.user-create-form');

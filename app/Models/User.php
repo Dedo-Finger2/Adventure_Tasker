@@ -44,6 +44,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    // TODO: Mudar para hasOne. Os usuários só podem ter um atributo só, nesse caso um conjunto de atributos, mas cada linha
+    // É um conjunto, sendo assim conta como um só e não vários.
     public function attributes()
     {
         return $this->hasMany(UserAttribute::class);
