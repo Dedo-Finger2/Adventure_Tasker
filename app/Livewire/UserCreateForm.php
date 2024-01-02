@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Models\UserAttribute;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -51,8 +52,29 @@ class UserCreateForm extends Component
         # Autenticar usuário
         auth()->login($user);
 
+        # Criar atributos do usuário recem cadastrado
+        $this->createUserAttributes($user, new UserAttribute);
+
         # Redirecionar usuário para a tela de home
         return redirect()->route('home')->with('success', 'Logado com sucesso!');
+    }
+
+    private function createUserAttributes(User $user, UserAttribute $userAttribute)
+    {
+        $userAttribute::create([
+            'user_id' => $user->id,
+            'current_level' => 0,
+            'max_level' => 50,
+            'current_exp' => 0,
+            'exp_next_level' => 50,
+            'current_money' => 0,
+            'rebirth_level' => 0,
+            'max_bag_slots' => 2,
+            'max_powerups_at_time' => 1,
+            'max_pwoerups_a_day' => 2,
+            'overdue_debuff_value' => 0.25,
+            'sub_task_debuff_value' => 0.25,
+        ]);
     }
 
     public function render()
