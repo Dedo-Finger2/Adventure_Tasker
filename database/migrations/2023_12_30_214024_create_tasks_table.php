@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('recurring')->default(false);
             $table->integer('recurring_type')->nullable(true)->default(0);
 
-            $table->unsignedBigInteger('task_id');
+            $table->unsignedBigInteger('task_id')->nullable(true);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('difficulty_id');
             $table->unsignedBigInteger('priority_id');

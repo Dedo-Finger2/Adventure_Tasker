@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Difficulty;
+use App\Models\Priority;
 use App\Models\Task;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -9,6 +11,13 @@ use Livewire\WithPagination;
 class MyTasksList extends Component
 {
     use WithPagination;
+
+    protected $listeners = ['task_created' => 'loadTasks'];
+
+    public function loadTasks()
+    {
+        $this->render(); // Chama o método render novamente para recarregar as tarefas
+    }
 
     public function render()
     {
