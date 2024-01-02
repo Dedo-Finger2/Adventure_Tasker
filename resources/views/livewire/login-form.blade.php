@@ -1,13 +1,15 @@
 <div>
+
     @if (session()->has('error'))
         <div>{{ session('error') }}</div>
     @endif
+
     {{-- Formulário, precisa do submit.prevent para evitar que haja como um formuláiro normal --}}
     <form wire:submit.prevent="auth">
         {{-- Campo de email --}}
         <div>
             <label for="email">E-mail:</label>
-            <input type="email" name="email" wire:model="email">
+            <input type="email" name="email" wire:model="email"> {{-- wire:model é uma forma de referenciar esse campo com o atributo da classe do componente --}}
             @error('email') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
         </div>
 
@@ -19,6 +21,7 @@
         </div>
 
         <button type="submit">Login</button>
-        <a href="{{ route('user.create') }}">Fazer cadastro</a>
+        <a href="{{ route('user.create') }}">Fazer cadastro</a> {{-- Link para a tela de cadastro de usuários --}}
     </form>
+
 </div>

@@ -15,7 +15,7 @@
         {{-- Campo de exp --}}
         <div>
             <label for="exp">Exp:</label>
-            <input type="number" step="0.1" name="exp" wire:model="exp"> {{-- wire:model é uma forma de referenciar esse campo com o atributo da classe do componente --}}
+            <input type="number" step="0.1" name="exp" wire:model="exp">
             @error('exp') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
         </div>
 
