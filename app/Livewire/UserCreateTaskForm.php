@@ -28,6 +28,15 @@ class UserCreateTaskForm extends Component
         "difficulty_id" => "required|exists:difficulties,id",
     ];
 
+
+    /**
+     * Método construtor
+     * seu trabalho é simplesmente setar os valores inicias
+     * dos campos de priority e difficulty pois sem isso
+     * o primeiro valor sempre é nulo
+     *
+     * @return void
+     */
     public function mount()
     {
         $this->priority_id = Priority::first()->id;
@@ -39,8 +48,10 @@ class UserCreateTaskForm extends Component
         # Validar os dados
         $this->validate();
 
+        # Altera o valor nulo de recurring para um valor boolean equivalente e válido
         if ($this->recurring == null) $this->recurring = false;
 
+        # Tentar criar tarefa
         try {
             $taskModel::create([
                 "title"          => $this->title,
@@ -55,10 +66,13 @@ class UserCreateTaskForm extends Component
                 "money"          => $this->getTaskMoney(),
             ]);
 
+            # Lançar mensagem de feedback
             session()->flash('message', "Tarefa criada com sucesso!");
 
+            # Acionar um evento de criação de tarefa para atualizar listagem
             $this->dispatch("task_created");
 
+            # Resetar os valores dos inputs após a criação para que possam ser criadas novas tarefas
             $this->reset(['title', 'description', 'due_date', 'recurring', 'recurring_type']);
 
         } catch (\Exception $e) {
@@ -66,6 +80,13 @@ class UserCreateTaskForm extends Component
         }
     }
 
+
+    /**
+     * Método responsável por calcular e retornar a quantidade de exp que a tarefa vai dar
+     * prioridade da task * multiplicador da dificuldade
+     *
+     * @return float
+     */
     private function getTaskExp()
     {
         $priority = Priority::find($this->priority_id);
@@ -74,6 +95,13 @@ class UserCreateTaskForm extends Component
         return $priority->exp * $difficulty->exp_multiplier;
     }
 
+
+    /**
+     * Método responsável por calcular e retornar a quantidade de dinheiro que a tarefa vai dar
+     * prioridade da task * multiplicador da dificuldade
+     *
+     * @return float
+     */
     private function getTaskMoney()
     {
         $priority = Priority::find($this->priority_id);
@@ -82,6 +110,13 @@ class UserCreateTaskForm extends Component
         return $priority->money * $difficulty->money_multiplier;
     }
 
+
+
+    /**
+     * Método responsável por renderizar o componente na view
+     *
+     * @return mixed
+     */
     public function render()
     {
         $priorities = Priority::all();

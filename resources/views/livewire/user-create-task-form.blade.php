@@ -57,7 +57,9 @@
             @error('recurring') <span>{{ $message }}</span> @enderror
         </div>
 
+        {{-- Seo campo de recorrencia de tarefas for marcado esse dropdown aparece --}}
         @if ($recurring)
+            {{-- Campo de seleção de recorrência --}}
             <div>
                 <label for="recurring_type">Tipo de recorrente:</label>
                 <select name="recurring_type" id="recurring_type" wire:model='recurring_type'>

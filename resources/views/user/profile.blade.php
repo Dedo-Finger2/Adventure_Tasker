@@ -32,6 +32,7 @@
         <button onclick="openTab(event, 'tab3')">Tab 3</button>
     </div>
 
+    {{-- Listagem de tarefas concluídas --}}
     <div id="tab1" class="tabcontent">
         <h3>Tarefas concluídas</h3>
         <livewire:user-completed-tasks-list />
