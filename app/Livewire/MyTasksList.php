@@ -21,16 +21,16 @@ class MyTasksList extends Component
         $this->render();
     }
 
-    public function completeTask($taskId)
+    public function toggleCompleteTask($taskId)
     {
         $task = Task::find($taskId);
-        $task->completed_at = now();
-        $task->save();
 
-        $this->dispatch('task_completed');
+        $task->completed_at = $task->completed_at != null ? null : now();
+        $task->save();
 
         session()->flash('message','Tarefa marcada como concluída!');
 
+        $this->dispatch('task_completed');
     }
 
 
