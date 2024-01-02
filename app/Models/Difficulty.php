@@ -17,6 +17,7 @@ class Difficulty extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'exp_multiplier',
         'money_multiplier',
     ];

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('priorities', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique()->nullable(false);
             $table->integer('money')->nullable(false);
             $table->float('exp')->nullable(false);
         });

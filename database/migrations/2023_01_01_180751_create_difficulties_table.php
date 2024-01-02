@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('difficulties', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique()->nullable(false);
             $table->float('money_multiplier')->nullable(false);
             $table->float('exp_multiplier')->nullable(false);
         });

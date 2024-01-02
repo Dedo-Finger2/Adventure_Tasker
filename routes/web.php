@@ -34,18 +34,18 @@ Route::get('/logout', [LoginController::class, 'logout'])
 Route::get('/register', [UserController::class, 'create'])
     ->name('user.create');
 Route::get('/profile', [UserController::class, 'profile'])
-    ->name('user.profile');
+    ->name('user.profile')->middleware('auth');
 Route::get('/my-tasks', [UserController::class, 'myTasks'])
-    ->name('user.tasks');
+    ->name('user.tasks')->middleware('auth');
 
 // Task
 
 
 // Priority
 Route::get('/create-priority', [PriorityController::class, 'create'])
-    ->name('priority.create');
+    ->name('priority.create')->middleware('auth');
 
-    
+
 // Difficulty
 Route::get('/create-difficulty', [DifficultyController::class, 'create'])
-    ->name('difficulty.create');
+    ->name('difficulty.create')->middleware('auth');
