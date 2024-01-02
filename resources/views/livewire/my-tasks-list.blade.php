@@ -1,5 +1,9 @@
 <div>
 
+    @if (session()->has('message'))
+        <div>{{ session('message') }}</div>
+    @endif
+    
     <form>
         @foreach ($tasks as $task)
             @if ($task->recurring)
