@@ -5,6 +5,6 @@
 @section('content') {{-- Inserindo o conteúdo único dessa página na base do layout --}}
     <h1>Create Priority</h1>
     <hr>
-    {{-- <livewire:user-create-form /> Formulário de cadastro em formato de componente livewire --}}
+    <livewire:create-priority-form /> {{-- Formulário de cadastro em formato de componente livewire --}}
 @endsection
 
