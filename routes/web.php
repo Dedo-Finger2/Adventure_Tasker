@@ -31,6 +31,9 @@ Route::get('/logout', [LoginController::class, 'logout'])
 // User
 Route::get('/register', [UserController::class, 'create'])
     ->name('user.create');
-
 Route::get('/profile', [UserController::class, 'profile'])
     ->name('user.profile');
+Route::get('/my-tasks', [UserController::class, 'myTasks'])
+    ->name('user.tasks');
+
+// Task

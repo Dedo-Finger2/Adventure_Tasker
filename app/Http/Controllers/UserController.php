@@ -28,4 +28,15 @@ class UserController extends Controller
         # Retornar a view de perfil do usuário
         return view("user.profile");
     }
+
+
+    /**
+     * Método responsável por carregar as tarefas do usuário
+     *
+     * @return mixed
+     */
+    public function myTasks()
+    {
+        return view("user.my-tasks");
+    }
 }
