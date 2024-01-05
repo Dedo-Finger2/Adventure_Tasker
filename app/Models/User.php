@@ -62,4 +62,9 @@ class User extends Authenticatable
         return $this->hasMany(Item::class);
     }
 
+    public function myItems()
+    {
+        return $this->belongsToMany(Item::class, 'user_items');
+    }
+
 }

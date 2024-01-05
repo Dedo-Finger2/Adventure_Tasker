@@ -29,4 +29,9 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function userItems()
+    {
+        return $this->belongsToMany(User::class, 'user_items');
+    }
+
 }
