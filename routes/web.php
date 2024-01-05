@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -49,3 +51,11 @@ Route::get('/create-priority', [PriorityController::class, 'create'])
 // Difficulty
 Route::get('/create-difficulty', [DifficultyController::class, 'create'])
     ->name('difficulty.create')->middleware('auth');
+
+
+// Stores
+Route::get('/stores', [StoreController::class, 'index'])->name('store.stores');
+Route::get('/store-item', [StoreController::class, 'itemStore'])->name('store.items');
+
+// Item
+Route::get('/create-item', [ItemController::class, 'create'])->name('item.create');

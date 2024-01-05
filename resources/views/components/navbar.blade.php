@@ -6,9 +6,11 @@
         <span>{{ auth()->user()->name }}</span> -
         <livewire:user-status-navbar />
         <a href="{{ route('user.profile') }}">Profile</a> -
+        <a href="{{ route('store.stores') }}">Stores</a> -
         <a href="{{ route('logout') }}">Logout</a> ---
     @endauth
     <a href="{{ route('priority.create') }}">Create priority</a> -
-    <a href="{{ route('difficulty.create') }}">Create difficulty</a>
+    <a href="{{ route('difficulty.create') }}">Create difficulty</a> -
+    <a href="{{ route('item.create') }}">Create item</a>
 </nav>
 <hr>
