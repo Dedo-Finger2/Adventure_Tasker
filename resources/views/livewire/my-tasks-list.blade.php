@@ -7,7 +7,7 @@
     </div>
 
     {{-- Se houver uma tarefa mostrar a listagem delas. Senão, mostrar uma mensagem de feedback ao usuário --}}
-    @if (count($tasks))
+    @if (count($tasks) > 0)
         @if (session()->has('message'))
             <div>{{ session('message') }}</div>
         @endif
