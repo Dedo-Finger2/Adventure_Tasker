@@ -13,6 +13,14 @@ class ItemStoreListItems extends Component
     public $search = ""; # Atributo que será usado como parâmetro de busca
     public $buy_quantity = 0;
 
+
+    /**
+     * Método responsável por realizar a ação de compra do usuario
+     *
+     * @param Item $item - Injeção de dependência
+     * @return void
+     */
+    // TODO: Adicionar o item comprado na tabela user_items
     public function buyItem(Item $item)
     {
         $userMoney = auth()->user()->attributes[0]->current_money;
@@ -28,7 +36,9 @@ class ItemStoreListItems extends Component
 
             $this->dispatch('update_status_navbar');
         }
+
         if ((int)$this->buy_quantity <= 0) session()->flash("status_buy","Selecione uma quantidade positiva!");
+
         if ($userMoney < $shopCost) session()->flash("status_buy","Você não tem dinheiro o suficiente para comprar {$this->buy_quantity} items desse!");
     }
 
