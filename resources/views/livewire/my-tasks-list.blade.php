@@ -1,6 +1,13 @@
 <div>
+    {{-- Formulário de busca de tarefas --}}
+    <div>
+        <form role="search">
+            <input wire:model.live='search' type="search" name="search" id="search" placeholder="Buscar tarefas">
+        </form>
+    </div>
+
     {{-- Se houver uma tarefa mostrar a listagem delas. Senão, mostrar uma mensagem de feedback ao usuário --}}
-    @if (count($tasks) > 0)
+    @if (count($tasks))
         @if (session()->has('message'))
             <div>{{ session('message') }}</div>
         @endif
@@ -28,6 +35,10 @@
 
         {{-- Controle da paginação das tarefas --}}
         {{ $tasks->links() }}
+
+    @elseif (count($tasks) <= 0 && $search != "")
+        {{-- Mensagem de feedback quando não é encontradas tasks com um nome específicado pelo usuário --}}
+        <p>Nenhuma task com o nome "{{ $search }}" foi encontrada.</p>
     @else
         {{-- Mensagem de feedback quando não há tarefas listadas --}}
         <p>Nenhuma task está vinculada a você.</p>

@@ -12,6 +12,8 @@ class MyTasksList extends Component
 {
     use WithPagination; # Habilita paginação no componente
 
+    public $search = ""; # Atributo usado para receber o nome da tarefa que o usuário está buscando
+
     # Ouvintes: Eles são como triggers, podendo executar ações que outro componente pedir
     protected $listeners = ['task_created' => 'loadTasks', 'task_completed' => 'loadTasks'];
 
@@ -99,21 +101,32 @@ class MyTasksList extends Component
         return true;
     }
 
-    
+
     /**
      * Método responsável por renderizar e listar as tarefas
      *
      * @return mixed
-     */
+     */ 
     public function render()
     {
-        # Listar as tarefas do usuário que não foram copletas ainda
-        $userTasks = Task::with('user')
-            ->where(
-            'user_id',
-            auth()->user()->id)
-            ->where('completed_at', null)
-            ->paginate(5);
+        # Tarefas do usuário que serão enviadas para a view
+        $userTasks = [];
+
+        # Se o valor na propriedade de busca for maior ou igual a 1...
+        if(strlen($this->search) >= 1) {
+            # Fazer uma busca das tarefas que possuem o título parecido com o nome buscado pelo usuário
+            $userTasks = Task::where('title', 'like','%'. $this->search .'%')
+                ->where('user_id', auth()->user()->id)
+                ->paginate(5);
+        } else {
+            # Listar as tarefas do usuário que não foram completas ainda sem ser afetado pela busca do usuário
+            $userTasks = Task::with('user')
+                ->where(
+                'user_id',
+                auth()->user()->id)
+                ->where('completed_at', null)
+                ->paginate(5);
+        }
 
         return view('livewire.my-tasks-list', [
             'tasks' => $userTasks,
