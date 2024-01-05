@@ -12,6 +12,13 @@
             @error('name') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
         </div>
 
+        {{-- Campo de custo --}}
+        <div>
+            <label for="cost">Custo:</label>
+            <input type="number" step="0.1" name="cost" id="cost" cols="30" rows="10" wire:model='cost'>
+            @error('cost') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
+        </div>
+
         {{-- Campo de descrição --}}
         <div>
             <label for="description">Descrição:</label>
@@ -19,12 +26,6 @@
             @error('description') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
         </div>
 
-        {{-- Campo de custo --}}
-        <div>
-            <label for="cost">Custo:</label>
-            <input type="number" step="0.1" name="cost" id="cost" cols="30" rows="10" wire:model='cost'>
-            @error('cost') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
-        </div>
 
         {{-- Campo de bebefício --}}
         <div>
@@ -40,7 +41,7 @@
             @error('cover_image') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
             {{-- Exibindo um preview da imagem --}}
             @if ($cover_image)
-                <br><br><img src="{{ $cover_image->temporaryUrl() }}" alt="preview" class="width: 20px;">
+                <br><br><img src="{{ $cover_image->temporaryUrl() }}" alt="preview" style="width: 200px;">
             @endif
         </div>
 

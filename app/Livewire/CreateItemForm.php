@@ -4,9 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Item;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateItemForm extends Component
 {
+    use WithFileUploads;
+
     public $name;
     public $description;
     public $cover_image;
@@ -19,7 +22,6 @@ class CreateItemForm extends Component
         'cover_image' => ['required', 'image'],
         'cost' => ['numeric', 'min:1'],
         'benefit' => ['required'],
-        'user_id' => ['nullable', 'exists:users,id']
     ];
 
     public function createItem(Item $itemModel)
@@ -27,8 +29,8 @@ class CreateItemForm extends Component
         $this->validate();
 
         # Guardar a imagem na pasta store e seu caminho numa variável
-        if ($this->item_cover) {
-            $item_cover_path = $this->item_cover->store('item_cover_uploads', 'public');
+        if ($this->cover_image) {
+            $item_cover_path = $this->cover_image->store('item_cover_uploads', 'public');
         }
 
         $item = $itemModel::create([
@@ -41,7 +43,10 @@ class CreateItemForm extends Component
         ]);
 
         # Lançar mensagem de feedback
-        session()->flash('message', "Tarefa criada com sucesso!");
+        session()->flash('message', "Item criado com sucesso!");
+
+        # Resetar os valores dos inputs após a criação para que possam ser criadas novas tarefas
+        $this->reset(['name', 'description', 'cover_image', 'cost', 'benefit']);
     }
 
     public function render()
