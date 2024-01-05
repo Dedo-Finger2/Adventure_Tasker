@@ -21,6 +21,7 @@ class ItemStoreListItems extends Component
      * @return void
      */
     // TODO: Adicionar o item comprado na tabela user_items
+    // TODO: Comentar esse método
     public function buyItem(Item $item)
     {
         $userMoney = auth()->user()->attributes[0]->current_money;
