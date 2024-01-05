@@ -12,6 +12,10 @@
             <div>{{ session('message') }}</div>
         @endif
 
+        @if (session()->has('status_buy'))
+            <span>{{ session('status_buy') }}</span>
+        @endif
+
         @foreach ($items as $item)
             <div>
                 <h2>{{ $item->name }}</h2>
@@ -23,8 +27,9 @@
                 <span>❇️{{ $item->benefit }}</span>
 
                 {{-- TODO: Formulário de compra do item --}}
-                <form>
-                    <input type="number" name="quantity" id="quantity">
+                <form wire:submit.prevent='buyItem({{ $item }})'>
+                    <input type="number" name="quantity-{{ $item->id }}" id="quantity-{{ $item->id }}"
+                        wire:model='buy_quantity'>
                     <button>Comprar</button>
                 </form>
             </div>

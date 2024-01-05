@@ -11,6 +11,26 @@ class ItemStoreListItems extends Component
     use WithPagination; # Ativa a paginação aqui
 
     public $search = ""; # Atributo que será usado como parâmetro de busca
+    public $buy_quantity = 0;
+
+    public function buyItem(Item $item)
+    {
+        $userMoney = auth()->user()->attributes[0]->current_money;
+        $shopCost = $item->cost * (int)$this->buy_quantity;
+
+        if ($userMoney >= $shopCost && $this->buy_quantity > 0) {
+            auth()->user()->attributes[0]->current_money -= $shopCost;
+
+            auth()->user()->attributes[0]->save();
+            auth()->user()->save();
+
+            session()->flash("status_buy","Item comprado!");
+
+            $this->dispatch('update_status_navbar');
+        }
+        if ((int)$this->buy_quantity <= 0) session()->flash("status_buy","Selecione uma quantidade positiva!");
+        if ($userMoney < $shopCost) session()->flash("status_buy","Você não tem dinheiro o suficiente para comprar {$this->buy_quantity} items desse!");
+    }
 
 
     /**
