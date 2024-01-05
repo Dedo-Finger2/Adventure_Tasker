@@ -16,6 +16,7 @@ class UserCreateTaskForm extends Component
     public $recurring_type;
     public $priority_id;
     public $difficulty_id;
+    public $canCreate = true;
 
     // Regras de validação
     protected $rules = [
@@ -39,10 +40,24 @@ class UserCreateTaskForm extends Component
      */
     public function mount()
     {
-        $this->priority_id = Priority::first()->id;
-        $this->difficulty_id = Difficulty::first()->id;
+        try {
+            $this->priority_id = Priority::first()->id;
+            $this->difficulty_id = Difficulty::first()->id;
+        } catch (\Exception) {
+            $this->priority_id = null;
+            $this->difficulty_id = null;
+            $this->canCreate = false;
+        }
     }
 
+
+    /**
+     * Método responsável por criar uma tarefa através dos dados do formulário de criação de tarefas
+     * do usuário
+     *
+     * @param Task $taskModel - Injeção de dependência
+     * @return void
+     */
     public function createTask(Task $taskModel)
     {
         # Validar os dados
@@ -109,7 +124,6 @@ class UserCreateTaskForm extends Component
 
         return $priority->money * $difficulty->money_multiplier;
     }
-
 
 
     /**

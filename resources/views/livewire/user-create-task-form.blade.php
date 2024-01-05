@@ -31,23 +31,33 @@
         {{-- Campo de prioridade --}}
         <div>
             <label for="priority">Prioridade:</label>
-            <select name="priority_id" id="priority_id" wire:model='priority_id'>
-                @foreach ($priorities as $priority)
-                    <option value="{{ $priority->id }}">{{ $priority->name }}</option>
-                @endforeach
-            </select>
-            @error('priority') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
+            {{-- Se não houver nenhuma prioridade criada, então mostrar uma mensagem ao usuário --}}
+            @if (count($priorities) > 0)
+                <select name="priority_id" id="priority_id" wire:model='priority_id'>
+                    @foreach ($priorities as $priority)
+                        <option value="{{ $priority->id }}">{{ $priority->name }}</option>
+                    @endforeach
+                </select>
+                @error('priority') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
+            @else
+                <span>Nenhuma prioridade foi criada ainda.</span>
+            @endif
         </div>
 
         {{-- Campo de dificuldade --}}
         <div>
             <label for="difficulty">Dificuldade:</label>
-            <select name="difficulty_id" id="difficulty_id" wire:model='difficulty_id'>
-                @foreach ($difficulties as $difficulty)
-                    <option value="{{ $difficulty->id }}">{{ $difficulty->name }}</option>
-                @endforeach
-            </select>
-            @error('difficulty') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
+            {{-- Se não houver dificuldades criadas, então mostrar uma mensagem ao usuário --}}
+            @if (count($difficulties) > 0)
+                <select name="difficulty_id" id="difficulty_id" wire:model='difficulty_id'>
+                    @foreach ($difficulties as $difficulty)
+                        <option value="{{ $difficulty->id }}">{{ $difficulty->name }}</option>
+                    @endforeach
+                </select>
+                @error('difficulty') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
+            @else
+                <span>Nenhuma dificuldade foi criada ainda.</span>
+            @endif
         </div>
 
         {{-- Campo de recorrente --}}
@@ -71,7 +81,7 @@
             </div>
         @endif
 
-        <button type="submit">Criar</button>
+        <button type="submit" @if(!$canCreate) {{ "disabled" }} @endif >Criar</button>
     </form>
 
 </div>

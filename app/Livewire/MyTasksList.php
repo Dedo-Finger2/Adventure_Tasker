@@ -48,11 +48,58 @@ class MyTasksList extends Component
         # Lançar uma mensagem
         session()->flash('message','Tarefa marcada como concluída!');
 
+        if ($this->earnMoney($task)) $this->dispatch('update_status_navbar');
+        if ($this->earnExp($task)) $this->dispatch('update_status_navbar');
+
         # Acionar o evento de task_completed
         $this->dispatch('task_completed');
     }
 
 
+    /**
+     * Método responsável por calcular o dinheiro que o usuário ganhou após completar uma tarefa
+     *
+     * @param Task $task - Injeção de dependência
+     * @return bool - verdadeiro se deu certo o ganho de dinheiro do usuário e falso caso tenha dado algum problema
+     */
+    private function earnMoney(Task $task)
+    {
+        # Pegando os dados do usuário logado no sistema
+        $user = auth()->user();
+        # Adicionar dinheiro no atributo current_money do usuário
+        $user->attributes[0]->current_money += $task->money;
+
+        # Salvar modificações
+        $user->save();
+        $user->attributes[0]->save();
+
+        # Retornar um boolean
+        return true;
+    }
+
+
+    /**
+     * Método responsável por calcular o exp que o usuário ganhou após completar uma tarefa
+     *
+     * @param Task $task - Injeção de dependência
+     * @return bool - verdadeiro se deu certo o ganho de exp do usuário e falso caso tenha dado algum problema
+     */
+    private function earnExp(Task $task)
+    {
+        # Pegando os dados do usuário logado no sistema
+        $user = auth()->user();
+        # Adicionar exp no atributo current_money do usuário
+        $user->attributes[0]->current_exp += $task->exp;
+
+        # Salvar modificações
+        $user->save();
+        $user->attributes[0]->save();
+
+        # Retornar um boolean
+        return true;
+    }
+
+    
     /**
      * Método responsável por renderizar e listar as tarefas
      *
