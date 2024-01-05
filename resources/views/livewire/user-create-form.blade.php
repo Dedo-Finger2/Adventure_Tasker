@@ -31,7 +31,7 @@
 
         {{-- Upload de imagens, tudo aqui é apenas o necessário. Com exceção do preview --}}
         <div>
-            <label for="password">Imagem de perfil:</label>
+            <label for="profile_image">Imagem de perfil:</label>
             <input accept="image/png, image/jpeg" type="file" name="profile_image" wire:model="profile_image">
             @error('profile_image') <span>{{ $message }}</span> @enderror {{-- Mostrando erros de validação --}}
             {{-- Exibindo um preview da imagem --}}
