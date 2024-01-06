@@ -30,14 +30,20 @@ class LoginForm extends Component
         # Autenticar o usuário
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             # Enviar ele para a home page
-            return redirect()->intended('home');
+            return redirect()->intended('/');
         } else {
             # # Retornar um erro caso não seja possível autenticar
-            session()->flash('error', "Email ou senha incorretos!");
+            $this->dispatch('alert',
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email ou senha incorretos!',
+                position: 'center',
+                showConfirmButton: true,
+            );
         }
     }
 
-    
+
     /**
      * Método responsável por renderizar o componente
      *
