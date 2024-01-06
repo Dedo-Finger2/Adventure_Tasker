@@ -1,3 +1,4 @@
+{{-- TODO: BUGADO! Quando marco uma task ela é removida daqui, ótmio, mas, não consigo remover a próxima apenas marcando, tenho que dar F5 pra que ela vá embora --}}
 <div>
     {{-- Se houver uma tarefa mostrar a listagem delas. Senão, mostrar uma mensagem de feedback ao usuário --}}
     @if (count($tasks) > 0)
@@ -25,7 +26,7 @@
                 <div style="width: 45%; height: 1px; margin-top: 10px; background: #000;"></div>
             @endforeach
         </form>
-
+        <br>
         {{-- Controle da paginação das tarefas --}}
         {{ $tasks->links() }}
     @else

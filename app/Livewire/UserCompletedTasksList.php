@@ -10,6 +10,8 @@ class UserCompletedTasksList extends Component
 {
     use WithPagination; # Habilita paginação no componente
 
+    protected $paginationTheme = "bootstrap";
+
     /**
      * Muda o status da tarefa de concluída para não concluída e vice versa
      *

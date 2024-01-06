@@ -12,6 +12,8 @@ class MyTasksList extends Component
 {
     use WithPagination; # Habilita paginação no componente
 
+    protected $paginationTheme = "bootstrap";
+
     public $search = ""; # Atributo usado para receber o nome da tarefa que o usuário está buscando
 
     # Ouvintes: Eles são como triggers, podendo executar ações que outro componente pedir
@@ -106,7 +108,7 @@ class MyTasksList extends Component
      * Método responsável por renderizar e listar as tarefas
      *
      * @return mixed
-     */ 
+     */
     public function render()
     {
         # Tarefas do usuário que serão enviadas para a view

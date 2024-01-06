@@ -1,4 +1,5 @@
-<header class="p-3 mb-3 bg-dark border-bottom">
+{{-- TODO: Adicionar os status do usuário na navbar --}}
+<header class="p-3 bg-dark border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
@@ -8,18 +9,17 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             {{-- TODO: Modal de criação de nova tarefa --}}
-            <li ><a href="#" class="nav-link px-2 text-white">Criar nova tarefa</a></li>
+            <li ><a href="{{ route('home') }}" class="nav-link px-2 text-white">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Criar nova tarefa</a></li>
             <li><a href="#" class="nav-link px-2 text-white">Criar novo item próprio</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Customers</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Products</a></li>
         </ul>
 
         <div class="dropdown text-end">
-          <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ asset('storage/'.auth()->user()->profile_image) }}" alt="mdo" width="32" height="32" class="rounded-circle">
-          </a>
+            <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ asset('storage/'.auth()->user()->profile_image) }}" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">Minhas tarefas</a></li>
+            <li><a class="dropdown-item" href="{{ route('user.tasks') }}">Minhas tarefas</a></li>
             <li><a class="dropdown-item" href="{{ route('user.profile') }}">Perfil</a></li>
             <li><a class="dropdown-item" href="#">Inventário</a></li>
             <li><hr class="dropdown-divider"></li>

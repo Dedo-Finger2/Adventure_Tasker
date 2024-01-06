@@ -3,74 +3,56 @@
 @section('title', 'Profile') {{-- Setando o título da página --}}
 
 @section('content') {{-- Inserindo o conteúdo único dessa página na base do layout --}}
-    <h1>Profile</h1>
-    <a href="{{ route('user.tasks') }}">Minhas tarefas</a> - <a href="{{ route('user.inventory') }}">Meus items</a> {{-- Link para as minhas tarefas --}}
-    <hr>
+    <body class="bg-secondary-subtle bg-gradient" style="height: 100vh;">
 
-    <div>
-        {{-- Imagem de perfil --}}
-        <img src="{{ asset('storage/'.auth()->user()->profile_image) }}" alt="profile_image" style="width: 100px;">
+        <div class="container bg-white mt-5 mb-5 rounded-3 p-5">
+            <div class="row">
 
-        {{-- Nome e data de criação da conta --}}
-        <h2>{{ auth()->user()->name }}</h2>
-        <span>{{ auth()->user()->created_at }}</span>
+                <div class="col-md-6">
+                    <img src="{{ asset('storage/'.auth()->user()->profile_image) }}" class="img-fluid w-50 rounded-3 shadow-sm border border-primary border-1" alt="">
 
-        {{-- Status em texto --}}
-        <ul>
-            <li>Level: {{ auth()->user()->attributes[0]->current_level }}</li>
-            <li>Dinheiro: {{ auth()->user()->attributes[0]->current_money }}</li>
-            <li>Exp: {{ auth()->user()->attributes[0]->current_exp }}/{{ auth()->user()->attributes[0]->exp_next_level }}</li>
-        </ul>
-    </div>
+                    <h2 class="mt-3">{{ auth()->user()->name }}</h2>
+                    <p class="">{{ auth()->user()->created_at }}</p>
 
-    <br><br> {{-- Espaço --}}
+                    <p class="fs-5"><span class="badge text-bg-primary">Level: {{ auth()->user()->attributes[0]->current_level }}/{{ auth()->user()->attributes[0]->max_level }}</span></p>
+                    <p class="fs-5"><span class="badge text-bg-warning">Moedas: ${{ auth()->user()->attributes[0]->current_money }}</span></p>
+                    <p class="fs-5"><span class="badge text-bg-info">Exp: {{ auth()->user()->attributes[0]->current_exp }}/{{ auth()->user()->attributes[0]->exp_next_level }}</span></p>
 
-    {{-- Tabs sem CSS --}}
-    <div>
-        <button onclick="openTab(event, 'tab1')">Tarefa concluídas</button>
-        <button onclick="openTab(event, 'tab2')">Tab 2</button>
-        <button onclick="openTab(event, 'tab3')">Tab 3</button>
-    </div>
+                    {{-- TODO: Implementar edição do usuário --}}
+                    <button class="btn btn-outline-primary shadow w-50 mt-4">Editar</button>
 
-    {{-- Listagem de tarefas concluídas --}}
-    <div id="tab1" class="tabcontent">
-        <h3>Tarefas concluídas</h3>
-        <livewire:user-completed-tasks-list />
-    </div>
+                </div>
 
-    <div id="tab2" class="tabcontent" style="display: none">
-        <h3>SOON</h3>
-        <p>Este é o conteúdo da Tab 2.</p>
-    </div>
+                <div class="col-md-6">
 
-    <div id="tab3" class="tabcontent" style="display: none">
-        <h3>SOON</h3>
-        <p>Este é o conteúdo da Tab 3.</p>
-    </div>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
-    {{-- Script das tabs --}}
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Tarefas concluídas</button>
+                        </li>
 
-            tabcontent = document.getElementsByClassName("tabcontent");
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Tarefas excluídas</button>
+                        </li>
 
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
+                    </ul>
 
-            tablinks = document.getElementsByTagName("button");
+                    <div class="tab-content" id="pills-tabContent">
 
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                            {{-- TODO: Alterar lá as coisas, o estilo de lá o CSS --}}
+                            <livewire:user-completed-tasks-list />
+                        </div>
 
-            document.getElementById(tabName).style.display = "block";
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                            {{-- TODO: Adicionar as tarefas deletadas --}}
+                        </div>
 
-            evt.currentTarget.className += " active";
-        }
-    </script>
-
-
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
 @endsection
 

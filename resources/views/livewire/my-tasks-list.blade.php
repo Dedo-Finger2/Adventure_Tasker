@@ -33,6 +33,7 @@
             @endforeach
         </form>
 
+        <br>
         {{-- Controle da paginação das tarefas --}}
         {{ $tasks->links() }}
 
