@@ -7,7 +7,7 @@
         <livewire:user-status-navbar />
         <a href="{{ route('user.profile') }}">Profile</a> -
         <a href="{{ route('store.stores') }}">Stores</a> -
-        <a href="{{ route('logout') }}">Logout</a> ---
+        <form action="{{ route('logout') }}" method="POST"> @csrf <button type="submit">Logout</button></form> ---
     @endauth
     <a href="{{ route('priority.create') }}">Create priority</a> -
     <a href="{{ route('difficulty.create') }}">Create difficulty</a> -

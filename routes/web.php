@@ -28,7 +28,7 @@ Route::get('/login', [LoginController::class, 'login'])
     -> name('login');
 Route::post('/auth', [LoginController::class, 'auth'])
     -> name('auth');
-Route::get('/logout', [LoginController::class, 'logout'])
+Route::post('/logout', [LoginController::class, 'logout'])
     -> name('logout');
 
 
@@ -56,8 +56,8 @@ Route::get('/create-difficulty', [DifficultyController::class, 'create'])
 
 
 // Stores
-Route::get('/stores', [StoreController::class, 'index'])->name('store.stores');
-Route::get('/store-item', [StoreController::class, 'itemStore'])->name('store.items');
+Route::get('/stores', [StoreController::class, 'index'])->name('store.stores')->middleware('auth');
+Route::get('/store-item', [StoreController::class, 'itemStore'])->name('store.items')->middleware('auth');
 
 // Item
-Route::get('/create-item', [ItemController::class, 'create'])->name('item.create');
+Route::get('/create-item', [ItemController::class, 'create'])->name('item.create')->middleware('auth');

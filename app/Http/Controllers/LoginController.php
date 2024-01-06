@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use view;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,14 +39,22 @@ class LoginController extends Controller
      * Método responsável por encerrar a sessão do usuário
      *
      * @param Request $request - Objeto com os dados da requisição feita
-     * @return void
+     * @return mixed
      */
     public function logout(Request $request)
     {
-        # Deslogar usando Auth::logout();
-        # Invalidar a sessão da requisição ($request)
-        # Gerar outro __token de segurança na sessão da requisição
-        # Redirecionar o usuário para a tela de login (com uma mensagem talvez)
+        // Deslogar usando Auth::logout();
+        Auth::logout();
+
+        // Invalidar a sessão da requisição ($request)
+        $request->session()->invalidate();
+
+        // Gerar outro __token de segurança na sessão da requisição
+        $request->session()->regenerateToken();
+
+        // Redirecionar o usuário para a tela de login (com uma mensagem talvez)
+        return redirect('/login');
     }
+
 
 }
