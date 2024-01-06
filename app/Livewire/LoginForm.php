@@ -32,7 +32,7 @@ class LoginForm extends Component
             # Enviar ele para a home page
             return redirect()->intended('/');
         } else {
-            # # Retornar um erro caso não seja possível autenticar
+            # Retornar um erro caso não seja possível autenticar através do sweetalert
             $this->dispatch('alert',
                 icon: 'error',
                 title: 'Oops...',
