@@ -39,6 +39,8 @@ Route::get('/profile', [UserController::class, 'profile'])
     ->name('user.profile')->middleware('auth');
 Route::get('/my-tasks', [UserController::class, 'myTasks'])
     ->name('user.tasks')->middleware('auth');
+Route::get('/my-inventory', [UserController::class, 'myInventory'])
+    ->name('user.inventory')->middleware('auth');
 
 // Task
 

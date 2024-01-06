@@ -4,7 +4,7 @@
 
 @section('content') {{-- Inserindo o conteúdo único dessa página na base do layout --}}
     <h1>Profile</h1>
-    <a href="{{ route('user.tasks') }}">Minhas tarefas</a> {{-- Link para as minhas tarefas --}}
+    <a href="{{ route('user.tasks') }}">Minhas tarefas</a> - <a href="{{ route('user.inventory') }}">Meus items</a> {{-- Link para as minhas tarefas --}}
     <hr>
 
     <div>

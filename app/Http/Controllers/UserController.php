@@ -39,4 +39,10 @@ class UserController extends Controller
     {
         return view("user.my-tasks");
     }
+
+
+    public function myInventory()
+    {
+        return view('user.my-inventory');
+    }
 }

@@ -9,6 +9,8 @@ class UserItem extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,5 +19,6 @@ class UserItem extends Model
     protected $fillable = [
         'user_id',
         'item_id',
+        'bought_at',
     ];
 }

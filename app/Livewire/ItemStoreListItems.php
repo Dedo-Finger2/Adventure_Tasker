@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Item;
+use App\Models\UserItem;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -33,6 +34,8 @@ class ItemStoreListItems extends Component
             auth()->user()->attributes[0]->save();
             auth()->user()->save();
 
+            $this->addItemToUserInventory($item);
+
             session()->flash("status_buy","Item comprado!");
 
             $this->dispatch('update_status_navbar');
@@ -43,6 +46,17 @@ class ItemStoreListItems extends Component
         if ($userMoney < $shopCost) session()->flash("status_buy","Você não tem dinheiro o suficiente para comprar {$this->buy_quantity} items desse!");
     }
 
+
+    private function addItemToUserInventory(Item $item)
+    {
+        $userId = auth()->user()->id;
+
+        $userIventory = UserItem::create([
+            'user_id' => $userId,
+            'item_id' => $item->id,
+            'bought_at' => now(),
+        ]);
+    }
 
     /**
      * Método responsável por renderziar o componente na view
